@@ -39,7 +39,7 @@ class Hybrid_Widget_Archives extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget(
+		parent::__construct(
 			'hybrid-archives',               // $this->id_base
 			__( 'Archives', 'hybrid-core' ), // $this->name
 			$widget_options,                 // $this->widget_options
@@ -153,13 +153,13 @@ class Hybrid_Widget_Archives extends WP_Widget {
 		$instance = wp_parse_args( (array) $instance, $defaults );
 
 		/* Create an array of archive types. */
-		$type = array( 
-			'alpha'      => esc_attr__( 'Alphabetical', 'hybrid-core' ), 
-			'daily'      => esc_attr__( 'Daily', 'hybrid-core' ), 
+		$type = array(
+			'alpha'      => esc_attr__( 'Alphabetical', 'hybrid-core' ),
+			'daily'      => esc_attr__( 'Daily', 'hybrid-core' ),
 			'monthly'    => esc_attr__( 'Monthly', 'hybrid-core' ),
-			'postbypost' => esc_attr__( 'Post By Post', 'hybrid-core' ), 
-			'weekly'     => esc_attr__( 'Weekly', 'hybrid-core' ), 
-			'yearly'     => esc_attr__( 'Yearly', 'hybrid-core' ) 
+			'postbypost' => esc_attr__( 'Post By Post', 'hybrid-core' ),
+			'weekly'     => esc_attr__( 'Weekly', 'hybrid-core' ),
+			'yearly'     => esc_attr__( 'Yearly', 'hybrid-core' )
 		);
 
 		/* Create an array of order options. */
@@ -169,10 +169,10 @@ class Hybrid_Widget_Archives extends WP_Widget {
 		);
 
 		/* Create an array of archive formats. */
-		$format = array( 
-			'custom' => esc_attr__( 'Custom', 'hybrid-core' ), 
-			'html'   => esc_attr__( 'HTML', 'hybrid-core' ), 
-			'option' => esc_attr__( 'Option', 'hybrid-core' ) 
+		$format = array(
+			'custom' => esc_attr__( 'Custom', 'hybrid-core' ),
+			'html'   => esc_attr__( 'HTML', 'hybrid-core' ),
+			'option' => esc_attr__( 'Option', 'hybrid-core' )
 		);
 		?>
 
@@ -186,7 +186,7 @@ class Hybrid_Widget_Archives extends WP_Widget {
 			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'limit' ); ?>" name="<?php echo $this->get_field_name( 'limit' ); ?>" value="<?php echo esc_attr( $instance['limit'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'type' ); ?>"><code>type</code></label> 
+			<label for="<?php echo $this->get_field_id( 'type' ); ?>"><code>type</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'type' ); ?>" name="<?php echo $this->get_field_name( 'type' ); ?>">
 				<?php foreach ( $type as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['type'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
@@ -194,7 +194,7 @@ class Hybrid_Widget_Archives extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><code>order</code></label> 
+			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><code>order</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
 				<?php foreach ( $order as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
@@ -205,7 +205,7 @@ class Hybrid_Widget_Archives extends WP_Widget {
 
 		<div class="hybrid-widget-controls columns-2 column-last">
 		<p>
-			<label for="<?php echo $this->get_field_id( 'format' ); ?>"><code>format</code></label> 
+			<label for="<?php echo $this->get_field_id( 'format' ); ?>"><code>format</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'format' ); ?>" name="<?php echo $this->get_field_name( 'format' ); ?>">
 				<?php foreach ( $format as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['format'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>

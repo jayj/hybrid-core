@@ -39,7 +39,7 @@ class Hybrid_Widget_Pages extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget(
+		parent::__construct(
 			'hybrid-pages',              // $this->id_base
 			__( 'Pages', 'hybrid-core'), // $this->name
 			$widget_options,             // $this->widget_options
@@ -148,25 +148,25 @@ class Hybrid_Widget_Pages extends WP_Widget {
 
 		$post_types = get_post_types( array( 'public' => true, 'hierarchical' => true ), 'objects' );
 
-		$sort_order = array( 
-			'ASC'  => esc_attr__( 'Ascending', 'hybrid-core' ), 
-			'DESC' => esc_attr__( 'Descending', 'hybrid-core' ) 
+		$sort_order = array(
+			'ASC'  => esc_attr__( 'Ascending', 'hybrid-core' ),
+			'DESC' => esc_attr__( 'Descending', 'hybrid-core' )
 		);
 
-		$sort_column = array( 
-			'post_author'   => esc_attr__( 'Author', 'hybrid-core' ), 
-			'post_date'     => esc_attr__( 'Date', 'hybrid-core' ), 
-			'ID'            => esc_attr__( 'ID', 'hybrid-core' ), 
-			'menu_order'    => esc_attr__( 'Menu Order', 'hybrid-core' ), 
-			'post_modified' => esc_attr__( 'Modified', 'hybrid-core' ), 
-			'post_name'     => esc_attr__( 'Slug', 'hybrid-core' ), 
-			'post_title'    => esc_attr__( 'Title', 'hybrid-core' ) 
+		$sort_column = array(
+			'post_author'   => esc_attr__( 'Author', 'hybrid-core' ),
+			'post_date'     => esc_attr__( 'Date', 'hybrid-core' ),
+			'ID'            => esc_attr__( 'ID', 'hybrid-core' ),
+			'menu_order'    => esc_attr__( 'Menu Order', 'hybrid-core' ),
+			'post_modified' => esc_attr__( 'Modified', 'hybrid-core' ),
+			'post_name'     => esc_attr__( 'Slug', 'hybrid-core' ),
+			'post_title'    => esc_attr__( 'Title', 'hybrid-core' )
 		);
 
-		$show_date = array( 
-			''         => '', 
-			'created'  => esc_attr__( 'Created', 'hybrid-core' ), 
-			'modified' => esc_attr__( 'Modified', 'hybrid-core' ) 
+		$show_date = array(
+			''         => '',
+			'created'  => esc_attr__( 'Created', 'hybrid-core' ),
+			'modified' => esc_attr__( 'Modified', 'hybrid-core' )
 		);
 
 		$meta_key = array_merge( array( '' ), (array) get_meta_keys() );
@@ -179,7 +179,7 @@ class Hybrid_Widget_Pages extends WP_Widget {
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><code>post_type</code></label> 
+			<label for="<?php echo $this->get_field_id( 'post_type' ); ?>"><code>post_type</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'post_type' ); ?>" name="<?php echo $this->get_field_name( 'post_type' ); ?>">
 				<?php foreach ( $post_types as $post_type ) { ?>
 					<option value="<?php echo esc_attr( $post_type->name ); ?>" <?php selected( $instance['post_type'], $post_type->name ); ?>><?php echo esc_html( $post_type->labels->singular_name ); ?></option>
@@ -187,7 +187,7 @@ class Hybrid_Widget_Pages extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'sort_order' ); ?>"><code>sort_order</code></label> 
+			<label for="<?php echo $this->get_field_id( 'sort_order' ); ?>"><code>sort_order</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'sort_order' ); ?>" name="<?php echo $this->get_field_name( 'sort_order' ); ?>">
 				<?php foreach ( $sort_order as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['sort_order'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
@@ -195,7 +195,7 @@ class Hybrid_Widget_Pages extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'sort_column' ); ?>"><code>sort_column</code></label> 
+			<label for="<?php echo $this->get_field_id( 'sort_column' ); ?>"><code>sort_column</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'sort_column' ); ?>" name="<?php echo $this->get_field_name( 'sort_column' ); ?>">
 				<?php foreach ( $sort_column as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['sort_column'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
@@ -234,7 +234,7 @@ class Hybrid_Widget_Pages extends WP_Widget {
 			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'exclude_tree' ); ?>" name="<?php echo $this->get_field_name( 'exclude_tree' ); ?>" value="<?php echo esc_attr( $instance['exclude_tree'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'meta_key' ); ?>"><code>meta_key</code></label> 
+			<label for="<?php echo $this->get_field_id( 'meta_key' ); ?>"><code>meta_key</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'meta_key' ); ?>" name="<?php echo $this->get_field_name( 'meta_key' ); ?>">
 				<?php foreach ( $meta_key as $meta ) { ?>
 					<option value="<?php echo esc_attr( $meta ); ?>" <?php selected( $instance['meta_key'], $meta ); ?>><?php echo esc_html( $meta ); ?></option>
@@ -261,7 +261,7 @@ class Hybrid_Widget_Pages extends WP_Widget {
 			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'link_after' ); ?>" name="<?php echo $this->get_field_name( 'link_after' ); ?>" value="<?php echo esc_attr( $instance['link_after'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'show_date' ); ?>"><code>show_date</code></label> 
+			<label for="<?php echo $this->get_field_id( 'show_date' ); ?>"><code>show_date</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'show_date' ); ?>" name="<?php echo $this->get_field_name( 'show_date' ); ?>">
 				<?php foreach ( $show_date as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['show_date'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>

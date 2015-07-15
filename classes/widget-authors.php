@@ -39,7 +39,7 @@ class Hybrid_Widget_Authors extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget(
+		parent::__construct(
 			'hybrid-authors',               // $this->id_base
 			__( 'Authors', 'hybrid-core' ), // $this->name
 			$widget_options,                // $this->widget_options
@@ -137,20 +137,20 @@ class Hybrid_Widget_Authors extends WP_Widget {
 		/* Merge the user-selected arguments with the defaults. */
 		$instance = wp_parse_args( (array) $instance, $defaults );
 
-		$order = array( 
-			'ASC'  => esc_attr__( 'Ascending', 'hybrid-core' ), 
-			'DESC' => esc_attr__( 'Descending', 'hybrid-core' ) 
+		$order = array(
+			'ASC'  => esc_attr__( 'Ascending', 'hybrid-core' ),
+			'DESC' => esc_attr__( 'Descending', 'hybrid-core' )
 		);
 
-		$orderby = array( 
-			'display_name' => esc_attr__( 'Display Name', 'hybrid-core' ), 
-			'email'        => esc_attr__( 'Email', 'hybrid-core' ), 
-			'ID'           => esc_attr__( 'ID', 'hybrid-core' ), 
-			'nicename'     => esc_attr__( 'Nice Name', 'hybrid-core' ), 
-			'post_count'   => esc_attr__( 'Post Count', 'hybrid-core' ), 
-			'registered'   => esc_attr__( 'Registered', 'hybrid-core' ), 
-			'url'          => esc_attr__( 'URL', 'hybrid-core' ), 
-			'user_login'   => esc_attr__( 'Login', 'hybrid-core' ) 
+		$orderby = array(
+			'display_name' => esc_attr__( 'Display Name', 'hybrid-core' ),
+			'email'        => esc_attr__( 'Email', 'hybrid-core' ),
+			'ID'           => esc_attr__( 'ID', 'hybrid-core' ),
+			'nicename'     => esc_attr__( 'Nice Name', 'hybrid-core' ),
+			'post_count'   => esc_attr__( 'Post Count', 'hybrid-core' ),
+			'registered'   => esc_attr__( 'Registered', 'hybrid-core' ),
+			'url'          => esc_attr__( 'URL', 'hybrid-core' ),
+			'user_login'   => esc_attr__( 'Login', 'hybrid-core' )
 		);
 
 		?>
@@ -161,7 +161,7 @@ class Hybrid_Widget_Authors extends WP_Widget {
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><code>order</code></label> 
+			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><code>order</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
 				<?php foreach ( $order as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
@@ -169,7 +169,7 @@ class Hybrid_Widget_Authors extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><code>orderby</code></label> 
+			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><code>orderby</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
 				<?php foreach ( $orderby as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['orderby'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>
@@ -181,7 +181,7 @@ class Hybrid_Widget_Authors extends WP_Widget {
 			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" value="<?php echo esc_attr( $instance['number'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'style' ); ?>"><code>style</code></label> 
+			<label for="<?php echo $this->get_field_id( 'style' ); ?>"><code>style</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'style' ); ?>" name="<?php echo $this->get_field_name( 'style' ); ?>">
 				<?php foreach ( array( 'list' => esc_attr__( 'List', 'hybrid-core'), 'none' => esc_attr__( 'None', 'hybrid-core' ) ) as $option_value => $option_label ) { ?>
 					<option value="<?php echo esc_attr( $option_value ); ?>" <?php selected( $instance['style'], $option_value ); ?>><?php echo esc_html( $option_label ); ?></option>

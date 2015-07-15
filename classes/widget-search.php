@@ -40,7 +40,7 @@ class Hybrid_Widget_Search extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget(
+		parent::__construct(
 			'hybrid-search',               // $this->id_base
 			__( 'Search', 'hybrid-core' ), // $this->name
 			$widget_options,               // $this->widget_options

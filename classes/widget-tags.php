@@ -39,7 +39,7 @@ class Hybrid_Widget_Tags extends WP_Widget {
 		);
 
 		/* Create the widget. */
-		$this->WP_Widget(
+		parent::__construct(
 			'hybrid-tags',               // $this->id_base
 			__( 'Tags', 'hybrid-core' ), // $this->name
 			$widget_options,             // $this->widget_options
@@ -172,32 +172,32 @@ class Hybrid_Widget_Tags extends WP_Widget {
 		/* <select> element options. */
 		$taxonomies = get_taxonomies( array( 'show_tagcloud' => true ), 'objects' );
 
-		$link = array( 
-			'view' => esc_attr__( 'View', 'hybrid-core' ), 
-			'edit' => esc_attr__( 'Edit', 'hybrid-core' ) 
+		$link = array(
+			'view' => esc_attr__( 'View', 'hybrid-core' ),
+			'edit' => esc_attr__( 'Edit', 'hybrid-core' )
 		);
 
-		$format = array( 
-			'flat' => esc_attr__( 'Flat', 'hybrid-core' ), 
-			'list' => esc_attr__( 'List', 'hybrid-core' ) 
+		$format = array(
+			'flat' => esc_attr__( 'Flat', 'hybrid-core' ),
+			'list' => esc_attr__( 'List', 'hybrid-core' )
 		);
 
-		$order = array( 
-			'ASC'  => esc_attr__( 'Ascending', 'hybrid-core' ), 
-			'DESC' => esc_attr__( 'Descending', 'hybrid-core' ), 
-			'RAND' => esc_attr__( 'Random', 'hybrid-core' ) 
+		$order = array(
+			'ASC'  => esc_attr__( 'Ascending', 'hybrid-core' ),
+			'DESC' => esc_attr__( 'Descending', 'hybrid-core' ),
+			'RAND' => esc_attr__( 'Random', 'hybrid-core' )
 		);
 
-		$orderby = array( 
-			'count' => esc_attr__( 'Count', 'hybrid-core' ), 
-			'name'  => esc_attr__( 'Name', 'hybrid-core' ) 
+		$orderby = array(
+			'count' => esc_attr__( 'Count', 'hybrid-core' ),
+			'name'  => esc_attr__( 'Name', 'hybrid-core' )
 		);
 
-		$unit = array( 
-			'pt' => 'pt', 
-			'px' => 'px', 
-			'em' => 'em', 
-			'%'  => '%' 
+		$unit = array(
+			'pt' => 'pt',
+			'px' => 'px',
+			'em' => 'em',
+			'%'  => '%'
 		);
 
 		?>
@@ -208,7 +208,7 @@ class Hybrid_Widget_Tags extends WP_Widget {
 			<input type="text" class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" value="<?php echo esc_attr( $instance['title'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><code>taxonomy</code></label> 
+			<label for="<?php echo $this->get_field_id( 'taxonomy' ); ?>"><code>taxonomy</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'taxonomy' ); ?>" name="<?php echo $this->get_field_name( 'taxonomy' ); ?>[]" size="4" multiple="multiple">
 				<?php foreach ( $taxonomies as $taxonomy ) { ?>
 					<option value="<?php echo $taxonomy->name; ?>" <?php selected( in_array( $taxonomy->name, (array)$instance['taxonomy'] ) ); ?>><?php echo $taxonomy->labels->singular_name; ?></option>
@@ -216,7 +216,7 @@ class Hybrid_Widget_Tags extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'format' ); ?>"><code>format</code></label> 
+			<label for="<?php echo $this->get_field_id( 'format' ); ?>"><code>format</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'format' ); ?>" name="<?php echo $this->get_field_name( 'format' ); ?>">
 				<?php foreach ( $format as $option_value => $option_label ) { ?>
 					<option value="<?php echo $option_value; ?>" <?php selected( $instance['format'], $option_value ); ?>><?php echo $option_label; ?></option>
@@ -224,7 +224,7 @@ class Hybrid_Widget_Tags extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><code>order</code></label> 
+			<label for="<?php echo $this->get_field_id( 'order' ); ?>"><code>order</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'order' ); ?>" name="<?php echo $this->get_field_name( 'order' ); ?>">
 				<?php foreach ( $order as $option_value => $option_label ) { ?>
 					<option value="<?php echo $option_value; ?>" <?php selected( $instance['order'], $option_value ); ?>><?php echo $option_label; ?></option>
@@ -232,7 +232,7 @@ class Hybrid_Widget_Tags extends WP_Widget {
 			</select>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><code>orderby</code></label> 
+			<label for="<?php echo $this->get_field_id( 'orderby' ); ?>"><code>orderby</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'orderby' ); ?>" name="<?php echo $this->get_field_name( 'orderby' ); ?>">
 				<?php foreach ( $orderby as $option_value => $option_label ) { ?>
 					<option value="<?php echo $option_value; ?>" <?php selected( $instance['orderby'], $option_value ); ?>><?php echo $option_label; ?></option>
@@ -263,7 +263,7 @@ class Hybrid_Widget_Tags extends WP_Widget {
 			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'smallest' ); ?>" name="<?php echo $this->get_field_name( 'smallest' ); ?>" value="<?php echo esc_attr( $instance['smallest'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'unit' ); ?>"><code>unit</code></label> 
+			<label for="<?php echo $this->get_field_id( 'unit' ); ?>"><code>unit</code></label>
 			<select class="smallfat" id="<?php echo $this->get_field_id( 'unit' ); ?>" name="<?php echo $this->get_field_name( 'unit' ); ?>">
 				<?php foreach ( $unit as $option_value => $option_label ) { ?>
 					<option value="<?php echo $option_value; ?>" <?php selected( $instance['unit'], $option_value ); ?>><?php echo $option_label; ?></option>
@@ -283,7 +283,7 @@ class Hybrid_Widget_Tags extends WP_Widget {
 			<input type="text" class="smallfat code" id="<?php echo $this->get_field_id( 'parent' ); ?>" name="<?php echo $this->get_field_name( 'parent' ); ?>" value="<?php echo esc_attr( $instance['parent'] ); ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'link' ); ?>"><code>link</code></label> 
+			<label for="<?php echo $this->get_field_id( 'link' ); ?>"><code>link</code></label>
 			<select class="widefat" id="<?php echo $this->get_field_id( 'link' ); ?>" name="<?php echo $this->get_field_name( 'link' ); ?>">
 				<?php foreach ( $link as $option_value => $option_label ) { ?>
 					<option value="<?php echo $option_value; ?>" <?php selected( $instance['link'], $option_value ); ?>><?php echo $option_label; ?></option>
